@@ -3,17 +3,51 @@ import { motion } from "framer-motion";
 
 const StarBackground = () => {
   const [stars, setStars] = useState([]);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mouseDirection, setMouseDirection] = useState({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState(false);
+  const [permanentOffset, setPermanentOffset] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
   const lastMouseMoveRef = useRef(null);
-  const animationRef = useRef(null);
+  const lastMousePositionRef = useRef({ x: 0, y: 0 });
+  const velocityRef = useRef({ x: 0, y: 0 });
 
-  // Throttle mouse move events
-  const throttledMouseMove = useCallback((e) => {
+  // Track mouse direction with velocity
+  const handleMouseMove = useCallback((e) => {
     if (containerRef.current) {
       const { clientX, clientY } = e;
-      setMousePosition({ x: clientX, y: clientY });
+      const currentPosition = { x: clientX, y: clientY };
+
+      // Calculate direction and velocity
+      if (
+        lastMousePositionRef.current.x !== 0 &&
+        lastMousePositionRef.current.y !== 0
+      ) {
+        const deltaX = currentPosition.x - lastMousePositionRef.current.x;
+        const deltaY = currentPosition.y - lastMousePositionRef.current.y;
+
+        // Calculate velocity (speed of movement)
+        const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (velocity > 2) {
+          // Normalize the direction vector
+          const magnitude = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          if (magnitude > 0) {
+            setMouseDirection({
+              x: deltaX / magnitude,
+              y: deltaY / magnitude,
+            });
+            velocityRef.current = { x: deltaX, y: deltaY };
+
+            // Add to permanent offset - this stays forever
+            setPermanentOffset((prev) => ({
+              x: prev.x + deltaX * 0.2,
+              y: prev.y + deltaY * 0.2,
+            }));
+          }
+        }
+      }
+
+      lastMousePositionRef.current = currentPosition;
       setIsMoving(true);
 
       if (lastMouseMoveRef.current) {
@@ -22,29 +56,31 @@ const StarBackground = () => {
 
       lastMouseMoveRef.current = setTimeout(() => {
         setIsMoving(false);
-      }, 200);
+        setMouseDirection({ x: 0, y: 0 });
+        velocityRef.current = { x: 0, y: 0 };
+      }, 150);
     }
   }, []);
 
   useEffect(() => {
     const generateStars = () => {
       const newStars = [];
-      // Much fewer stars for cleaner look
-      for (let i = 0; i < 30; i++) {
+      // More stars for better effect
+      for (let i = 0; i < 100; i++) {
         const brightness = Math.random();
         newStars.push({
           id: i,
-          size: Math.random() * 2 + 1, // 1-3px stars
+          size: Math.random() * 2 + 1,
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          animationDuration: Math.random() * 8 + 4, // Faster animations
+          animationDuration: Math.random() * 8 + 4,
           initialX: Math.random() * window.innerWidth,
           initialY: Math.random() * window.innerHeight,
           brightness: brightness > 0.7 ? 0.8 : brightness > 0.4 ? 0.6 : 0.4,
-          // Much larger movement ranges
-          floatX: (Math.random() - 0.5) * 0.8,
-          floatY: (Math.random() - 0.5) * 0.8,
-          floatDuration: Math.random() * 10 + 6, // Faster float duration
+          // Restored floating movement
+          floatX: (Math.random() - 0.5) * 0.6,
+          floatY: (Math.random() - 0.5) * 0.6,
+          floatDuration: Math.random() * 12 + 8,
         });
       }
       setStars(newStars);
@@ -60,11 +96,11 @@ const StarBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", throttledMouseMove, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", throttledMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
       if (lastMouseMoveRef.current) {
         clearTimeout(lastMouseMoveRef.current);
       }
@@ -72,19 +108,21 @@ const StarBackground = () => {
         clearTimeout(resizeTimeout);
       }
     };
-  }, [throttledMouseMove]);
+  }, [handleMouseMove]);
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-0 overflow-hidden">
       {stars.map((star) => {
-        // Calculate mouse influence - stars move toward mouse direction
-        const mouseInfluence = isMoving ? 1.2 : 0; // Increased influence
-        const moveX = isMoving
-          ? (mousePosition.x / window.innerWidth - 0.5) * mouseInfluence
-          : 0;
-        const moveY = isMoving
-          ? (mousePosition.y / window.innerHeight - 0.5) * mouseInfluence
-          : 0;
+        // Current mouse movement
+        const mouseInfluence = isMoving ? 2 : 0;
+        const currentMoveX =
+          mouseDirection.x * mouseInfluence * (star.size * 2);
+        const currentMoveY =
+          mouseDirection.y * mouseInfluence * (star.size * 2);
+
+        // Permanent offset that never resets
+        const permanentMoveX = permanentOffset.x * (star.size * 0.5);
+        const permanentMoveY = permanentOffset.y * (star.size * 0.5);
 
         return (
           <motion.div
@@ -96,7 +134,6 @@ const StarBackground = () => {
               left: `${star.x}px`,
               top: `${star.y}px`,
               opacity: star.brightness,
-              // Simple, clean look without glow
               backgroundColor: "white",
               borderRadius: "50%",
             }}
@@ -106,12 +143,10 @@ const StarBackground = () => {
                 star.brightness,
                 star.brightness * 0.5,
               ],
-              // Much larger floating movement
-              x: [star.floatX * 150, -star.floatX * 150, star.floatX * 150],
-              y: [star.floatY * 150, -star.floatY * 150, star.floatY * 150],
-              // Mouse influence - stars move toward mouse
-              translateX: moveX * (star.size * 3),
-              translateY: moveY * (star.size * 3),
+              x: [star.floatX * 100, -star.floatX * 100, star.floatX * 100],
+              y: [star.floatY * 100, -star.floatY * 100, star.floatY * 100],
+              translateX: permanentMoveX + currentMoveX,
+              translateY: permanentMoveY + currentMoveY,
             }}
             transition={{
               opacity: {
@@ -129,8 +164,8 @@ const StarBackground = () => {
                 repeat: Infinity,
                 ease: "easeInOut",
               },
-              translateX: { duration: 0.6, ease: "easeOut" },
-              translateY: { duration: 0.6, ease: "easeOut" },
+              translateX: { duration: 0.2, ease: "easeOut" },
+              translateY: { duration: 0.2, ease: "easeOut" },
             }}
           />
         );
