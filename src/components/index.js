@@ -1,0 +1,10 @@
+export { default as StarBackground } from './StarBackground';
+export { default as Header } from './Header';
+export { default as Profile } from './Profile';
+export { default as CurrentRole } from './CurrentRole';
+export { default as PreviousRoles } from './PreviousRoles';
+export { default as Timeline } from './Timeline';
+export { default as ProjectCarousel } from './ProjectCarousel';
+export { default as TechStack } from './TechStack';
+export { default as LastPlayedSong } from './LastPlayedSong';
+export { default as Footer } from './Footer'; 
