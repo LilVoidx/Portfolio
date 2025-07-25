@@ -9,11 +9,12 @@ const ProjectCarousel = () => {
   const projects = useMemo(
     () => [
       {
-        title: "NASA Dashboard",
-        logo: "https://cdn.iconscout.com/icon/free/png-256/free-nasa-282190.png",
+        title: "Euphoria",
+        logo: "https://cdn.iconscout.com/icon/free/png-256/free-music-2031275-1713370.png",
         image:
-          "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-        description: "Use free NASA APIs in this dashboard",
+          "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        description:
+          "A music sharing platform where users can discover, share, and connect through their favorite tunes",
       },
       {
         title: "McDonalds",

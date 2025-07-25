@@ -2,43 +2,44 @@ import React from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import {
   SiJavascript,
-  SiLaravel,
-  SiWordpress,
-  SiHtml5,
-  SiCss3,
+  SiVuedotjs,
+  SiNuxtdotjs,
+  SiNestjs,
+  SiTypescript,
+  SiNextdotjs,
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa";
 
 const PreviousRoles = ({ isVisible }) => {
   const previousRoles = [
     {
-      position: "Software Developer",
-      company: "Grumft",
-      location: "Sao Paulo",
-      year: "2022 - 2024",
+      position: "Fullstack Developer",
+      company: "Moscow Anastesia Company",
+      location: "Moscow",
+      year: "2024 - 2025",
       description:
-        "Development of websites and web applications using React, TypeScript, and Next.js, including dashboards and management panels. Systems management with Node.js, version control with Git and AWS, and backend in Laravel, with experience in WordPress.",
+        "Developed an ecommerce site for Misses Olimpia products using Vue.js and Nuxt.js. Backend built with Nest.js and TypeScript. Created a complete online shopping experience with modern frontend and robust backend architecture.",
       technologies: [
-        { name: "JavaScript", icon: <SiJavascript size={16} /> },
-        { name: "Laravel", icon: <SiLaravel size={16} /> },
-        { name: "Git", icon: <FaGitAlt size={16} /> },
-        { name: "WordPress", icon: <SiWordpress size={16} /> },
+        { name: "Vue.js", icon: <SiVuedotjs size={16} /> },
+        { name: "Nuxt.js", icon: <SiNuxtdotjs size={16} /> },
+        { name: "Nest.js", icon: <SiNestjs size={16} /> },
+        { name: "TypeScript", icon: <SiTypescript size={16} /> },
       ],
-      logo: "G",
+      logo: "M",
     },
     {
-      position: "System Analyst",
-      company: "GOIDEA",
-      location: "Sao Paulo",
-      year: "2019 - 2022",
+      position: "Freelance Developer",
+      company: "Book Store Management System",
+      location: "Remote",
+      year: "2024 - 2025",
       description:
-        "Development of small to medium applications, such as responsive apps and websites. Responsible for creating web application prototypes, managing, and automating services.",
+        "Built a quick book store management system using Next.js. Created an efficient solution for inventory management, sales tracking, and customer data handling. Delivered a complete system that streamlined the client's business operations.",
       technologies: [
-        { name: "HTML5", icon: <SiHtml5 size={16} /> },
-        { name: "CSS3", icon: <SiCss3 size={16} /> },
+        { name: "Next.js", icon: <SiNextdotjs size={16} /> },
         { name: "JavaScript", icon: <SiJavascript size={16} /> },
+        { name: "Git", icon: <FaGitAlt size={16} /> },
       ],
-      logo: "GO",
+      logo: "B",
     },
   ];
 

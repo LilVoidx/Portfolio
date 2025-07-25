@@ -68,8 +68,8 @@ const Profile = () => {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <img
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-            alt="Eduardo Rigo"
+            src="https://avatars.githubusercontent.com/u/125039715?v=4"
+            alt="Youssef Magdy"
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -82,7 +82,7 @@ const Profile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Hi, I am Eduardo Rigo,
+            Hi, I am Youssef Magdy,
           </motion.h2>
           <motion.p
             className="text-sm sm:text-base text-gray-300 mb-2 font-light leading-relaxed"
@@ -90,8 +90,8 @@ const Profile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            a frontend developer, specializing in UI design and creating
-            engaging user experiences with a strong attention to detail.
+            a Software Engineer who doesn't give two shits if you like his work
+            or nah but promise to always cook and deliver on time.
           </motion.p>
           <motion.p
             className="text-sm sm:text-base text-gray-400 font-light"
@@ -99,7 +99,7 @@ const Profile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Buenos Aires, Argentina
+            Kazan, Russia
           </motion.p>
         </div>
       </div>

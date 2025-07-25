@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaChevronLeft } from "react-icons/fa";
-import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
+import { SiNestjs, SiTypescript, SiPostgresql } from "react-icons/si";
 import PreviousRoles from "./PreviousRoles";
 
 const CurrentRole = () => {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);
 
   const currentTechnologies = [
-    { name: "Next.js", icon: <SiNextdotjs size={16} /> },
+    { name: "Nest.js", icon: <SiNestjs size={16} /> },
     { name: "TypeScript", icon: <SiTypescript size={16} /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss size={16} /> },
+    { name: "PostgreSQL", icon: <SiPostgresql size={16} /> },
   ];
 
   return (
@@ -25,15 +25,17 @@ const CurrentRole = () => {
         <div className="flex-1">
           <div className="mb-3 sm:mb-4">
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
-              Frontend Developer
+              Backend Developer
             </h3>
             <p className="text-sm sm:text-base text-gray-400 mt-1">
-              2024 - PRESENT
+              2025 - PRESENT
             </p>
           </div>
           <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-5 font-light leading-relaxed">
-            React and Next.js application development for the public sector,
-            focused on accessibility, security, and digital innovation.
+            I work with Nest.js, PostgreSQL, and TypeScript to develop web app
+            systems for employees of Mossport. Hard architecture, great
+            planning, and I'm a junior developer who's always learning and
+            growing.
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {currentTechnologies.map((tech, index) => (
@@ -56,10 +58,10 @@ const CurrentRole = () => {
         <div className="flex flex-col items-start lg:items-end mt-4 lg:mt-0 lg:ml-8">
           <div className="flex items-center mb-1">
             <div className="w-3 h-3 bg-green-500 rounded-sm mr-2 flex items-center justify-center">
-              <span className="text-white text-xs font-bold">G</span>
+              <span className="text-white text-xs font-bold">S</span>
             </div>
             <span className="text-sm sm:text-base font-light text-gray-400">
-              Govone
+              Softra
             </span>
           </div>
           <span className="text-xs sm:text-sm text-gray-400 font-light">

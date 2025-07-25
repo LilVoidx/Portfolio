@@ -6,13 +6,13 @@ const Header = () => {
     <header className="flex justify-between items-start mb-8 sm:mb-12 lg:mb-16">
       {/* Left side - Logo and name */}
       <div className="flex items-center">
-        <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gray-700 rounded-full mr-3 sm:mr-4 lg:mr-5 flex items-center justify-center">
-          <span className="text-white font-bold text-sm sm:text-lg lg:text-xl">
-            e
+        <div className="mr-3 sm:mr-4 lg:mr-5 flex items-center justify-center">
+          <span className="text-green-500 font-bold text-lg sm:text-xl lg:text-2xl">
+            &lt;/&gt;
           </span>
         </div>
         <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wider text-white">
-          EDUARDEV
+          VOID.DEV
         </h1>
       </div>
 

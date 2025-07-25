@@ -1,104 +1,129 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGraduationCap, FaBriefcase } from 'react-icons/fa';
-import { 
-  SiJavascript, SiTypescript, SiReact, SiPython, SiNodedotjs, 
-  SiCplusplus, SiDocker, SiGo, SiAmazonaws 
-} from 'react-icons/si';
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiPython,
+  SiNodedotjs,
+  SiCplusplus,
+  SiNestjs,
+  SiPostgresql,
+  SiVuedotjs,
+  SiNuxtdotjs,
+  SiNextdotjs,
+} from "react-icons/si";
 
 const Timeline = () => {
-  const [activeTab, setActiveTab] = useState('work');
+  const [activeTab, setActiveTab] = useState("work");
 
   const education = [
     {
-      degree: "Master of Computer Science",
-      institution: "Stanford University",
-      year: "2020-2022",
-      description: "Specialized in Artificial Intelligence and Machine Learning",
+      degree: "Mathematics Focused High School",
+      institution: "ElQuds Language School Egypt",
+      year: "2008-2021",
+      description:
+        "Completed high school with a strong focus on mathematics and academic excellence",
       technologies: [
         { name: "React", icon: <SiReact size={16} /> },
         { name: "TypeScript", icon: <SiTypescript size={16} /> },
-        { name: "Python", icon: <SiPython size={16} /> }
-      ]
+        { name: "Python", icon: <SiPython size={16} /> },
+      ],
     },
     {
-      degree: "Bachelor of Science in Computer Engineering",
-      institution: "MIT",
-      year: "2016-2020",
-      description: "Graduated with honors, GPA 3.9/4.0",
+      degree: "Bachelor of Software Engineering",
+      institution: "Kazan Federal University",
+      year: "2022-2026",
+      description:
+        "Currently pursuing degree in Software Engineering. Learning Java, JavaScript, PostgreSQL, Python and other technologies to build a strong foundation in software development.",
       technologies: [
         { name: "JavaScript", icon: <SiJavascript size={16} /> },
         { name: "Node.js", icon: <SiNodedotjs size={16} /> },
-        { name: "C++", icon: <SiCplusplus size={16} /> }
-      ]
-    }
+        { name: "C++", icon: <SiCplusplus size={16} /> },
+      ],
+    },
   ];
 
   const work = [
     {
-      position: "Senior Software Engineer",
-      company: "Google",
-      year: "2022-Present",
-      description: "Leading frontend development for Google Cloud Platform",
+      position: "Backend Developer",
+      company: "Softra",
+      year: "2025-Present",
+      description:
+        "Working with Nest.js, PostgreSQL, and TypeScript to develop web app systems for employees of Mossport. Hard architecture, great planning, and always learning and growing as a junior developer.",
       technologies: [
-        { name: "React", icon: <SiReact size={16} /> },
+        { name: "Nest.js", icon: <SiNestjs size={16} /> },
         { name: "TypeScript", icon: <SiTypescript size={16} /> },
-        { name: "Docker", icon: <SiDocker size={16} /> },
-        { name: "Go", icon: <SiGo size={16} /> }
-      ]
+        { name: "PostgreSQL", icon: <SiPostgresql size={16} /> },
+      ],
     },
     {
-      position: "Software Engineer",
-      company: "Microsoft",
-      year: "2020-2022",
-      description: "Full-stack development for Azure services",
+      position: "Fullstack Developer",
+      company: "Moscow Anastesia Company",
+      year: "2024-2025",
+      description:
+        "Developed an ecommerce site for Misses Olimpia products using Vue.js and Nuxt.js. Backend built with Nest.js and TypeScript. Created a complete online shopping experience with modern frontend and robust backend architecture.",
       technologies: [
+        { name: "Vue.js", icon: <SiVuedotjs size={16} /> },
+        { name: "Nuxt.js", icon: <SiNuxtdotjs size={16} /> },
+        { name: "Nest.js", icon: <SiNestjs size={16} /> },
+        { name: "TypeScript", icon: <SiTypescript size={16} /> },
+      ],
+    },
+    {
+      position: "Freelance Developer",
+      company: "Book Store Management System",
+      year: "2024-2025",
+      description:
+        "Built a quick book store management system using Next.js. Created an efficient solution for inventory management, sales tracking, and customer data handling. Delivered a complete system that streamlined the client's business operations.",
+      technologies: [
+        { name: "Next.js", icon: <SiNextdotjs size={16} /> },
         { name: "JavaScript", icon: <SiJavascript size={16} /> },
-        { name: "Python", icon: <SiPython size={16} /> },
-        { name: "AWS", icon: <SiAmazonaws size={16} /> }
-      ]
-    }
+        { name: "React", icon: <SiReact size={16} /> },
+      ],
+    },
   ];
 
   const tabVariants = {
-    active: { 
+    active: {
       borderBottom: "2px solid white",
       color: "#ffffff",
-      fontWeight: 400
+      fontWeight: 400,
     },
-    inactive: { 
+    inactive: {
       borderBottom: "2px solid transparent",
       color: "#9ca3af",
-      fontWeight: 300
-    }
+      fontWeight: 300,
+    },
   };
 
   const contentVariants = {
     hidden: { opacity: 0, height: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       height: "auto",
-      transition: { 
+      transition: {
         duration: 0.4,
-        staggerChildren: 0.1
-      }
+        staggerChildren: 0.1,
+      },
     },
-    exit: { 
+    exit: {
       opacity: 0,
       height: 0,
-      transition: { 
-        duration: 0.3
-      }
-    }
+      transition: {
+        duration: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.4 }
-    }
+      transition: { duration: 0.4 },
+    },
   };
 
   const TimelineItem = ({ item, index }) => (
