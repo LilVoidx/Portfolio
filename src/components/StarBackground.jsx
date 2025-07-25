@@ -82,7 +82,7 @@ const StarBackground = () => {
       const newStars = [];
       const mobile = checkMobile();
       // Much fewer stars for mobile performance
-      const starCount = mobile ? 50 : 200; // Reduced from 150 to 50 for mobile
+      const starCount = mobile ? 50 : 100; // Reduced from 150 to 50 for mobile
 
       for (let i = 0; i < starCount; i++) {
         const brightness = Math.random();
