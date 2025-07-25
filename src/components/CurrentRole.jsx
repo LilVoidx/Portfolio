@@ -32,10 +32,10 @@ const CurrentRole = () => {
             </p>
           </div>
           <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-5 font-light leading-relaxed">
-            I work with Nest.js, PostgreSQL, and TypeScript to develop web app
-            systems for employees of Mossport. Hard architecture, great
-            planning, and I'm a junior developer who's always learning and
-            growing.
+            Building the backend magic for Mossport's employee systems with
+            Nest.js, PostgreSQL, and TypeScript. Crafting solid architecture and
+            planning like a boss, while learning the ropes as a junior dev who's
+            always hungry for more knowledge and growth.
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {currentTechnologies.map((tech, index) => (

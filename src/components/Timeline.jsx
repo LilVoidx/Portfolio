@@ -24,7 +24,7 @@ const Timeline = () => {
       institution: "ElQuds Language School Egypt",
       year: "2008-2021",
       description:
-        "Completed high school with a strong focus on mathematics and academic excellence",
+        "Survived high school with a focus on math - because apparently that's what smart people do. Actually learned some useful stuff along the way, believe it or not.",
       technologies: [
         { name: "React", icon: <SiReact size={16} /> },
         { name: "TypeScript", icon: <SiTypescript size={16} /> },
@@ -36,7 +36,7 @@ const Timeline = () => {
       institution: "Kazan Federal University",
       year: "2022-2026",
       description:
-        "Currently pursuing degree in Software Engineering. Learning Java, JavaScript, PostgreSQL, Python and other technologies to build a strong foundation in software development.",
+        "Currently grinding through Software Engineering degree. Learning Java, JavaScript, PostgreSQL, Python and whatever else they throw at us. Building a solid foundation so I don't break everything I touch.",
       technologies: [
         { name: "JavaScript", icon: <SiJavascript size={16} /> },
         { name: "Node.js", icon: <SiNodedotjs size={16} /> },
@@ -51,7 +51,7 @@ const Timeline = () => {
       company: "Softra",
       year: "2025-Present",
       description:
-        "Working with Nest.js, PostgreSQL, and TypeScript to develop web app systems for employees of Mossport. Hard architecture, great planning, and always learning and growing as a junior developer.",
+        "Building the backend magic for Mossport's employee systems with Nest.js, PostgreSQL, and TypeScript. Crafting solid architecture and planning like a boss, while learning the ropes as a junior dev who's always hungry for more knowledge and growth.",
       technologies: [
         { name: "Nest.js", icon: <SiNestjs size={16} /> },
         { name: "TypeScript", icon: <SiTypescript size={16} /> },
@@ -63,7 +63,7 @@ const Timeline = () => {
       company: "Moscow Anastesia Company",
       year: "2024-2025",
       description:
-        "Developed an ecommerce site for Misses Olimpia products using Vue.js and Nuxt.js. Backend built with Nest.js and TypeScript. Created a complete online shopping experience with modern frontend and robust backend architecture.",
+        "Built a sick ecommerce site for Ms Olympia products using Vue.js and Nuxt.js. Backend was crafted with Nest.js and TypeScript. Created a complete online shopping experience that actually works and looks good - no broken carts here!",
       technologies: [
         { name: "Vue.js", icon: <SiVuedotjs size={16} /> },
         { name: "Nuxt.js", icon: <SiNuxtdotjs size={16} /> },
@@ -76,7 +76,7 @@ const Timeline = () => {
       company: "Book Store Management System",
       year: "2024-2025",
       description:
-        "Built a quick book store management system using Next.js. Created an efficient solution for inventory management, sales tracking, and customer data handling. Delivered a complete system that streamlined the client's business operations.",
+        "Whipped up a quick book store management system using Next.js. Made inventory management and sales tracking actually bearable for the client. Delivered a system that didn't make them want to throw their computer out the window.",
       technologies: [
         { name: "Next.js", icon: <SiNextdotjs size={16} /> },
         { name: "JavaScript", icon: <SiJavascript size={16} /> },

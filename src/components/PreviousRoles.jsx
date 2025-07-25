@@ -18,7 +18,7 @@ const PreviousRoles = ({ isVisible }) => {
       location: "Moscow",
       year: "2024 - 2025",
       description:
-        "Developed an ecommerce site for Misses Olimpia products using Vue.js and Nuxt.js. Backend built with Nest.js and TypeScript. Created a complete online shopping experience with modern frontend and robust backend architecture.",
+        "Built a sick ecommerce site for Ms Olympia products using Vue.js and Nuxt.js. Backend was crafted with Nest.js and TypeScript. Created a complete online shopping experience that actually works and looks good - no broken carts here!",
       technologies: [
         { name: "Vue.js", icon: <SiVuedotjs size={16} /> },
         { name: "Nuxt.js", icon: <SiNuxtdotjs size={16} /> },
@@ -33,7 +33,7 @@ const PreviousRoles = ({ isVisible }) => {
       location: "Remote",
       year: "2024 - 2025",
       description:
-        "Built a quick book store management system using Next.js. Created an efficient solution for inventory management, sales tracking, and customer data handling. Delivered a complete system that streamlined the client's business operations.",
+        "Whipped up a quick book store management system using Next.js. Made inventory management and sales tracking actually bearable for the client. Delivered a system that didn't make them want to throw their computer out the window.",
       technologies: [
         { name: "Next.js", icon: <SiNextdotjs size={16} /> },
         { name: "JavaScript", icon: <SiJavascript size={16} /> },
