@@ -1,70 +1,90 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaChevronDown } from 'react-icons/fa';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
-import PreviousRoles from './PreviousRoles';
+import { FaChevronLeft } from "react-icons/fa";
+import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
+import PreviousRoles from "./PreviousRoles";
 
 const CurrentRole = () => {
   const [showPreviousRoles, setShowPreviousRoles] = useState(false);
 
   const currentTechnologies = [
-    { icon: <SiReact />, name: "React" },
-    { icon: <SiNextdotjs />, name: "Next.js" },
-    { icon: <SiTypescript />, name: "TypeScript" },
-    { icon: <SiTailwindcss />, name: "TailwindCSS" }
+    { name: "Next.js", icon: <SiNextdotjs size={16} /> },
+    { name: "TypeScript", icon: <SiTypescript size={16} /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss size={16} /> },
   ];
 
   return (
-    <div className="mb-8">
-      <h2 className="text-xs font-light tracking-wider uppercase mb-2 text-gray-400">Currently</h2>
-      <div className="flex justify-between items-start">
-        <div>
-          <div className="mb-2">
-            <h3 className="text-lg font-light">Frontend Developer</h3>
-            <p className="text-xs text-gray-400">2024 - PRESENT</p>
+    <div className="mb-8 sm:mb-12 lg:mb-16">
+      {/* CURRENTLY heading */}
+      <h2 className="text-xs sm:text-sm font-light tracking-wider uppercase mb-4 sm:mb-6 text-gray-400">
+        Currently
+      </h2>
+
+      {/* Current Role */}
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-6 sm:mb-8">
+        <div className="flex-1">
+          <div className="mb-3 sm:mb-4">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
+              Frontend Developer
+            </h3>
+            <p className="text-sm sm:text-base text-gray-400 mt-1">
+              2024 - PRESENT
+            </p>
           </div>
-          <p className="text-xs text-gray-300 mb-3 font-light">
-            React and Next.js application development for the public sector, focused on accessibility, security, and digital
-            innovation.
+          <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-5 font-light leading-relaxed">
+            React and Next.js application development for the public sector,
+            focused on accessibility, security, and digital innovation.
           </p>
-          <div className="flex items-center mb-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {currentTechnologies.map((tech, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                className="mr-3"
-                whileHover={{ 
+                className="flex items-center"
+                whileHover={{
                   scale: 1.2,
-                  filter: "brightness(1.3)"
+                  filter: "brightness(1.3)",
                 }}
+                transition={{ type: "spring", stiffness: 500 }}
               >
-                {React.cloneElement(tech.icon, { size: 16 })}
+                {tech.icon}
               </motion.div>
             ))}
           </div>
-          <motion.button 
-            className="text-xs text-gray-400 mt-1 flex items-center"
-            whileHover={{ color: "#ffffff" }}
-            onClick={() => setShowPreviousRoles(!showPreviousRoles)}
-          >
-            <motion.div
-              animate={{ rotate: showPreviousRoles ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <FaChevronDown className="mr-1" size={10} />
-            </motion.div>
-            Previous roles
-          </motion.button>
-          
-          <PreviousRoles isVisible={showPreviousRoles} />
         </div>
-        <div className="flex flex-col items-end">
+
+        {/* Company info - right aligned */}
+        <div className="flex flex-col items-start lg:items-end mt-4 lg:mt-0 lg:ml-8">
           <div className="flex items-center mb-1">
-            <div className="w-3 h-3 bg-green-500 rounded-sm mr-2"></div>
-            <span className="text-xs font-light">Govone</span>
+            <div className="w-3 h-3 bg-green-500 rounded-sm mr-2 flex items-center justify-center">
+              <span className="text-white text-xs font-bold">G</span>
+            </div>
+            <span className="text-sm sm:text-base font-light text-gray-400">
+              Govone
+            </span>
           </div>
-          <span className="text-xs text-gray-400 font-light">Remote</span>
+          <span className="text-xs sm:text-sm text-gray-400 font-light">
+            Remote
+          </span>
         </div>
       </div>
+
+      {/* Previous roles link */}
+      <motion.button
+        className="text-sm sm:text-base text-gray-400 mt-4 sm:mt-6 flex items-center interactive"
+        whileHover={{ color: "#ffffff" }}
+        onClick={() => setShowPreviousRoles(!showPreviousRoles)}
+      >
+        <motion.div
+          animate={{ rotate: showPreviousRoles ? -90 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FaChevronLeft className="mr-2" size={12} />
+        </motion.div>
+        Previous roles
+      </motion.button>
+
+      {/* Previous Roles */}
+      <PreviousRoles isVisible={showPreviousRoles} />
     </div>
   );
 };

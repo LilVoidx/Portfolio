@@ -3,72 +3,88 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #000000;
   color: white;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
 }
 
+/* Custom font sizes to match image exactly */
+.text-xs {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem;
+}
+
+/* Star background */
 .star {
   position: absolute;
   background-color: white;
   border-radius: 50%;
-  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.3);
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
-.tech-stack-container {
-  width: 200%;
+/* Technology icons styling */
+.tech-icon {
+  width: 28px;
+  height: 28px;
+  background-color: #374151;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
 }
 
-.project-card-image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  z-index: 0;
-}
-
-.project-card-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(to left, rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 1));
-  z-index: 1;
-}
-
-.project-card-content {
-  position: relative;
-  z-index: 2;
-}
-
-.github-contribution {
+/* Company logo styling */
+.company-logo {
   width: 12px;
   height: 12px;
-  margin: 2px;
   border-radius: 2px;
-}
-
-.contribution-light {
-  background-color: #ffffff;
-}
-
-.contribution-dark {
-  background-color: #1a1a1a;
-}
-
-/* Add smooth transitions for all elements */
-* {
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
 }
 
 /* Custom scrollbar */
@@ -89,9 +105,9 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Optimize performance */
-.star {
-  will-change: transform, opacity;
+/* Optimize performance for animations */
+.motion-safe\:animate-pulse {
+  will-change: opacity;
 }
 
 /* Reduce animation work for better performance */
@@ -102,4 +118,34 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Ensure proper spacing between sections */
+.section-spacing {
+  margin-bottom: 4rem; /* 64px */
+}
+
+/* Profile section specific styling */
+.profile-section {
+  margin-bottom: 4rem; /* 64px */
+}
+
+/* Role section specific styling */
+.role-section {
+  margin-bottom: 4rem; /* 64px */
+}
+
+/* Technology icons container */
+.tech-icons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Company info alignment */
+.company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 2rem; /* 32px */
 }

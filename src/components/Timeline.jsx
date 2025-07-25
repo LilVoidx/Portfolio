@@ -102,70 +102,94 @@ const Timeline = () => {
   };
 
   const TimelineItem = ({ item, index }) => (
-    <motion.div 
-      className="mb-8 relative"
-      variants={itemVariants}
-    >
-      <motion.div 
-        className="absolute w-2.5 h-2.5 bg-white rounded-full -left-[5px] top-1.5 border border-black"
-        animate={{ 
-          boxShadow: ["0 0 0px 0px rgba(255,255,255,0.3)", "0 0 8px 2px rgba(255,255,255,0.7)", "0 0 0px 0px rgba(255,255,255,0.3)"]
+    <motion.div className="mb-8 sm:mb-12 relative" variants={itemVariants}>
+      {/* Timeline line */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10"></div>
+
+      {/* Glowing ball positioned on the line */}
+      <motion.div
+        className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full left-[-4px] sm:left-[-6px] top-3 border border-black z-10"
+        animate={{
+          boxShadow: [
+            "0 0 0px 0px rgba(255,255,255,0.3)",
+            "0 0 8px 2px rgba(255,255,255,0.7)",
+            "0 0 0px 0px rgba(255,255,255,0.3)",
+          ],
         }}
-        transition={{ 
+        transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       />
-      <div className="flex justify-between items-start mb-1">
-        <h3 className="text-lg font-light">{item.degree || item.position}</h3>
-        <p className="text-xs text-gray-400 font-light">{item.year}</p>
-      </div>
-      <p className="text-sm text-gray-300 font-light mb-1">{item.institution || item.company}</p>
-      <p className="text-xs text-gray-400 mb-2 font-light">{item.description}</p>
-      <div className="flex flex-wrap gap-3">
-        {item.technologies.map((tech, techIndex) => (
-          <motion.div 
-            key={techIndex} 
-            className="flex items-center"
-            whileHover={{ 
-              scale: 1.2,
-              filter: "brightness(1.3)"
-            }}
-            transition={{ type: "spring", stiffness: 500 }}
-          >
-            {tech.icon}
-          </motion.div>
-        ))}
+
+      {/* Content with proper spacing and new layout */}
+      <div className="pl-6 sm:pl-8">
+        {/* Company/Institution Name */}
+        <h3 className="text-lg sm:text-xl font-light text-white mb-1">
+          {item.institution || item.company}
+        </h3>
+
+        {/* Date Range */}
+        <p className="text-xs sm:text-sm text-gray-400 font-light mb-8 sm:mb-12">
+          {item.year}
+        </p>
+
+        {/* Job Title/Degree */}
+        <h4 className="text-base sm:text-lg font-light text-white mb-2 sm:mb-3">
+          {item.degree || item.position}
+        </h4>
+
+        {/* Job Description */}
+        <p className="text-xs sm:text-sm text-gray-300 font-light mb-3 sm:mb-4 leading-relaxed">
+          {item.description}
+        </p>
+
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2 sm:gap-3">
+          {item.technologies.map((tech, techIndex) => (
+            <motion.div
+              key={techIndex}
+              className="flex items-center"
+              whileHover={{
+                scale: 1.2,
+                filter: "brightness(1.3)",
+              }}
+              transition={{ type: "spring", stiffness: 500 }}
+            >
+              {tech.icon}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
 
   return (
     <div className="mb-8">
-      <div className="flex mb-5 border-b border-white/10">
-        <motion.button 
-          className="flex items-center py-2 px-4 mr-6"
-          animate={activeTab === 'education' ? 'active' : 'inactive'}
+      <div className="flex mb-4 sm:mb-6 border-b border-white/10 overflow-x-auto">
+        <motion.button
+          className="flex items-center py-2 px-3 sm:px-4 mr-4 sm:mr-6 text-sm sm:text-lg whitespace-nowrap"
+          animate={activeTab === "education" ? "active" : "inactive"}
           variants={tabVariants}
-          onClick={() => setActiveTab('education')}
+          onClick={() => setActiveTab("education")}
           whileHover={{ color: "#ffffff" }}
         >
-          <FaGraduationCap className="mr-2" size={14} />
+          <FaGraduationCap className="mr-1 sm:mr-2" size={16} />
           Education
         </motion.button>
-        <motion.button 
-          className="flex items-center py-2 px-4"
-          animate={activeTab === 'work' ? 'active' : 'inactive'}
+        <motion.button
+          className="flex items-center py-2 px-3 sm:px-4 text-sm sm:text-lg whitespace-nowrap"
+          animate={activeTab === "work" ? "active" : "inactive"}
           variants={tabVariants}
-          onClick={() => setActiveTab('work')}
+          onClick={() => setActiveTab("work")}
           whileHover={{ color: "#ffffff" }}
         >
-          <FaBriefcase className="mr-2" size={14} />
+          <FaBriefcase className="mr-1 sm:mr-2" size={16} />
           Work
         </motion.button>
       </div>
-      
+
       <div className="relative">
         <AnimatePresence mode="wait">
           <motion.div
@@ -176,10 +200,12 @@ const Timeline = () => {
             variants={contentVariants}
             className="relative"
           >
-            <div className="relative pl-6 border-l border-white/10">
-              {(activeTab === 'education' ? education : work).map((item, index) => (
-                <TimelineItem key={index} item={item} index={index} />
-              ))}
+            <div className="relative">
+              {(activeTab === "education" ? education : work).map(
+                (item, index) => (
+                  <TimelineItem key={index} item={item} index={index} />
+                )
+              )}
             </div>
           </motion.div>
         </AnimatePresence>

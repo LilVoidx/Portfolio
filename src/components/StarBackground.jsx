@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 
 const StarBackground = () => {
   const [stars, setStars] = useState([]);
@@ -7,95 +7,85 @@ const StarBackground = () => {
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
   const lastMouseMoveRef = useRef(null);
+  const animationRef = useRef(null);
+
+  // Throttle mouse move events
+  const throttledMouseMove = useCallback((e) => {
+    if (containerRef.current) {
+      const { clientX, clientY } = e;
+      setMousePosition({ x: clientX, y: clientY });
+      setIsMoving(true);
+
+      if (lastMouseMoveRef.current) {
+        clearTimeout(lastMouseMoveRef.current);
+      }
+
+      lastMouseMoveRef.current = setTimeout(() => {
+        setIsMoving(false);
+      }, 200);
+    }
+  }, []);
 
   useEffect(() => {
     const generateStars = () => {
       const newStars = [];
-      // Reduced number of stars for better performance
-      for (let i = 0; i < 120; i++) {
+      // Much fewer stars for cleaner look
+      for (let i = 0; i < 30; i++) {
         const brightness = Math.random();
-        // Make stars smaller and less bright
         newStars.push({
           id: i,
-          size: Math.random() * 1.5 + 0.5, // Smaller stars
+          size: Math.random() * 2 + 1, // 1-3px stars
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          animationDuration: Math.random() * 5 + 3,
+          animationDuration: Math.random() * 8 + 4, // Faster animations
           initialX: Math.random() * window.innerWidth,
           initialY: Math.random() * window.innerHeight,
-          // Reduced brightness
-          brightness: brightness > 0.9 ? 0.8 : brightness > 0.7 ? 0.6 : 0.3,
-          velocityX: (Math.random() - 0.5) * 0.2,
-          velocityY: (Math.random() - 0.5) * 0.2,
+          brightness: brightness > 0.7 ? 0.8 : brightness > 0.4 ? 0.6 : 0.4,
+          // Much larger movement ranges
+          floatX: (Math.random() - 0.5) * 0.8,
+          floatY: (Math.random() - 0.5) * 0.8,
+          floatDuration: Math.random() * 10 + 6, // Faster float duration
         });
       }
       setStars(newStars);
     };
 
     generateStars();
-    window.addEventListener('resize', generateStars);
-    
-    const handleMouseMove = (e) => {
-      if (containerRef.current) {
-        const { clientX, clientY } = e;
-        setMousePosition({ x: clientX, y: clientY });
-        setIsMoving(true);
-        
-        // Clear any existing timeout
-        if (lastMouseMoveRef.current) {
-          clearTimeout(lastMouseMoveRef.current);
-        }
-        
-        // Set a timeout to reset isMoving after mouse stops
-        lastMouseMoveRef.current = setTimeout(() => {
-          setIsMoving(false);
-        }, 100);
-      }
+
+    // Throttled resize handler
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(generateStars, 100);
     };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    // Animation loop for continuous star movement
-    const animationFrame = requestAnimationFrame(function animate() {
-      setStars(prevStars => {
-        return prevStars.map(star => {
-          let newX = star.x + star.velocityX;
-          let newY = star.y + star.velocityY;
-          
-          // Wrap around screen edges
-          if (newX < 0) newX = window.innerWidth;
-          if (newX > window.innerWidth) newX = 0;
-          if (newY < 0) newY = window.innerHeight;
-          if (newY > window.innerHeight) newY = 0;
-          
-          return {
-            ...star,
-            x: newX,
-            y: newY
-          };
-        });
-      });
-      
-      requestAnimationFrame(animate);
-    });
-    
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", throttledMouseMove, { passive: true });
+
     return () => {
-      window.removeEventListener('resize', generateStars);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", throttledMouseMove);
       if (lastMouseMoveRef.current) {
         clearTimeout(lastMouseMoveRef.current);
       }
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
     };
-  }, []);
+  }, [throttledMouseMove]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-0">
+    <div ref={containerRef} className="fixed inset-0 z-0 overflow-hidden">
       {stars.map((star) => {
-        // Calculate movement based on mouse position when mouse is moving
-        const moveX = isMoving ? (mousePosition.x / window.innerWidth - 0.5) * 20 : 0;
-        const moveY = isMoving ? (mousePosition.y / window.innerHeight - 0.5) * 20 : 0;
-        
+        // Calculate mouse influence - stars move toward mouse direction
+        const mouseInfluence = isMoving ? 1.2 : 0; // Increased influence
+        const moveX = isMoving
+          ? (mousePosition.x / window.innerWidth - 0.5) * mouseInfluence
+          : 0;
+        const moveY = isMoving
+          ? (mousePosition.y / window.innerHeight - 0.5) * mouseInfluence
+          : 0;
+
         return (
           <motion.div
             key={star.id}
@@ -106,22 +96,41 @@ const StarBackground = () => {
               left: `${star.x}px`,
               top: `${star.y}px`,
               opacity: star.brightness,
-              // Reduced glow effect
-              boxShadow: `0 0 ${star.size}px ${star.size / 2}px rgba(255, 255, 255, ${star.brightness * 0.5})`,
+              // Simple, clean look without glow
+              backgroundColor: "white",
+              borderRadius: "50%",
             }}
             animate={{
-              opacity: [star.brightness * 0.6, star.brightness, star.brightness * 0.6],
-              x: isMoving ? moveX * (star.size / 3) : 0,
-              y: isMoving ? moveY * (star.size / 3) : 0,
+              opacity: [
+                star.brightness * 0.5,
+                star.brightness,
+                star.brightness * 0.5,
+              ],
+              // Much larger floating movement
+              x: [star.floatX * 150, -star.floatX * 150, star.floatX * 150],
+              y: [star.floatY * 150, -star.floatY * 150, star.floatY * 150],
+              // Mouse influence - stars move toward mouse
+              translateX: moveX * (star.size * 3),
+              translateY: moveY * (star.size * 3),
             }}
             transition={{
               opacity: {
                 duration: star.animationDuration,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               },
-              x: { duration: 0.3, ease: "easeOut" },
-              y: { duration: 0.3, ease: "easeOut" }
+              x: {
+                duration: star.floatDuration,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              y: {
+                duration: star.floatDuration,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              translateX: { duration: 0.6, ease: "easeOut" },
+              translateY: { duration: 0.6, ease: "easeOut" },
             }}
           />
         );
@@ -130,4 +139,4 @@ const StarBackground = () => {
   );
 };
 
-export default StarBackground; 
+export default StarBackground;
